@@ -1,0 +1,26 @@
+{
+    "name": "miskowskij/aws-lamp-app",
+    "description": "A LAMP app using deployment on AWS",
+    "homepage": "https://github.com/miskowskij/aws-lamp-app",
+    "license": "Apache-2.0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mathias Åkerberg",
+            "email": "zegoffinator@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Miskowskij\\Src\\": "src",
+            "Miskowskij\\Test\\": "tests"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "slim/slim": "^3.8"
+    }
+}
