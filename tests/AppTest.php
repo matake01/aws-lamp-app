@@ -12,7 +12,7 @@ class AppTest extends \PHPUnit_Framework_TestCase {
         parent::setUp();
 
         $this->client = new Client();
-        $this->domain = 'http://localhost:3000/ops/aws-lamp-app/src/App.php';
+        $this->domain = 'http://localhost:8000/ops/aws-lamp-app/src/App.php';
     }
 
     public function testIndex()
