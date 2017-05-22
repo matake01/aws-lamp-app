@@ -35,7 +35,7 @@ DOCKER_USER
 
 ## Database Access
 
-This example assumes that a MySQL storage already exists and that following environment variables are available:
+This example assumes that an [Amazon RDS](https://aws.amazon.com/rds/) storage already exists with following environment variables available:
 
 ```
 RDS_HOSTNAME
