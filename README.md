@@ -19,7 +19,6 @@ configure a few CircleCI environment variables before the deploy script will wor
 
 ```
 AWS_ACCESS_KEY_ID
-AWS_ACCOUNT_ID
 AWS_APPLICATION_NAME
 AWS_EB_BUCKET_NAME
 AWS_ENVIRONMENT_NAME
