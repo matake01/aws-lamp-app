@@ -1,5 +1,6 @@
 #! /bin/bash
 
+
 CIRCLE_SHA1=$1
 
 DOCKER_ORGANISATION=$2
