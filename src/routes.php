@@ -1,4 +1,4 @@
-<?php
+<?php namespace Miskowskij\Src;
 /**
  * Copyright 2016 Mathias Åkerberg
  *
@@ -19,4 +19,27 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache license v2.0
  */
 
-require __DIR__ . '/../src/routes.php';
+use Miskowskij\Src\App as App;
+
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+use \Slim\App as Route;
+
+require dirname(__FILE__) . '/../vendor/autoload.php';
+
+$app = new App;
+$route = new Route;
+
+$route->get('/', function (Request $request, Response $response) use (&$app) {
+    return $response->getBody()->write($app->index())
+});
+
+$route->get('/foo', function (Request $request, Response $response) use (&$app) {
+    return $response->getBody()->write($app->foo());
+});
+
+$route->get('/bar', function (Request $request, Response $response) use (&$app) {
+    return $response->getBody()->write($app->bar());
+});
+
+$route->run();
