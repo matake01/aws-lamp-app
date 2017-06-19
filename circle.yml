@@ -13,7 +13,7 @@ dependencies:
 
 test:
     override:
-    - phpunit tests
+    - vendor/bin/phpunit
     post:
     - docker run -d -p 80:80 -e "SECRET_KEY_BASE=abcd1234" $DOCKER_ORGANISATION/$DOCKER_REPOSITORY_NAME:$CIRCLE_SHA1; sleep 1
     - curl --retry 10 --retry-delay 5 -v http://localhost:80

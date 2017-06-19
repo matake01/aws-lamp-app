@@ -14,7 +14,7 @@ Then we will finally copy the new version to AWS S3 based on the recent created 
 
 ## Prerequisites
 
-This example utilizes AWS and DOCKER information that you may don't want to public. You'll need to
+This example utilizes AWS and DOCKER information that you may not want to public. You'll need to
 configure a few CircleCI environment variables before the deploy script will work:
 
 ```
