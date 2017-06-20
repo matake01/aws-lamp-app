@@ -15,6 +15,9 @@ COPY . /var/www/app
 #Override the Apache Config
 COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
 
+#Allow directory permission
+RUN chmod -R 777 /var/www/app
+
 EXPOSE 80
 EXPOSE 443
 
