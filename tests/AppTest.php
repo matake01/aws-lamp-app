@@ -52,7 +52,7 @@ class AppTest extends \PHPUnit_Framework_TestCase {
 
     public function testBaz()
     {
-        $this->assertEquals($this->app->bar(), 'welcome to baz');
+        $this->assertEquals($this->app->baz(), 'welcome to baz');
     }
 
 }
