@@ -42,8 +42,4 @@ $route->get('/bar', function (Request $request, Response $response) use (&$app) 
     return $response->getBody()->write($app->bar());
 });
 
-$route->get('/baz', function (Request $request, Response $response) use (&$app) {
-    return $response->getBody()->write($app->bar());
-});
-
 $route->run();
