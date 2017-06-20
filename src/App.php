@@ -38,4 +38,8 @@ class App {
         return 'welcome to bar';
     }
 
+    public function baz() {
+        return 'welcome to baz';
+    }
+
 }

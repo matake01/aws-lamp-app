@@ -1,4 +1,4 @@
-FROM nimmis/apache-php5
+FROM nimmis/apache-php5:latest
 
 MAINTAINER Mathias Åkerberg <zegoffinator@gmail.com>
 
