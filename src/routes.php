@@ -31,7 +31,7 @@ $app = new App;
 $route = new Route;
 
 $route->get('/', function (Request $request, Response $response) use (&$app) {
-    return $response->getBody()->write($app->index())
+    return $response->getBody()->write($app->index());
 });
 
 $route->get('/foo', function (Request $request, Response $response) use (&$app) {
