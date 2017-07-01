@@ -49,7 +49,7 @@ RUN apt-get autoremove -y && apt-get clean all
 
 # Configuration for Apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
-ADD apache/000-default.conf /etc/apache2/sites-available/
+ADD config/apache/000-default.conf /etc/apache2/sites-available/
 RUN ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
 RUN a2enmod rewrite
 
@@ -57,7 +57,7 @@ EXPOSE 80
 
 # Change website folder rights and upload your website
 RUN chown -R www-data:www-data /var/www/html
-ADD ./app /var/www/html
+ADD ./ /var/www/html
 
 # Change working directory
 WORKDIR /var/www/html
