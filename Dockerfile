@@ -23,7 +23,6 @@ COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN chmod -R 777 /var/www/app && \
 chmod -R 777 /var/log/apache2
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8000
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
