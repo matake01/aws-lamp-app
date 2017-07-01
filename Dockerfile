@@ -1,28 +1,68 @@
-FROM nimmis/apache-php5:latest
+FROM php:7.0.12-apache
 
-MAINTAINER Mathias Åkerberg <zegoffinator@gmail.com>
+ENV DEBIAN_FRONTEND=noninteractive
 
-#Create a new directory to run our app.
-RUN mkdir -p /var/www/app && \
-a2enmod rewrite
+# Install the PHP extensions
+RUN apt-get update && apt-get install -y git \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install mbstring opcache pdo zip
 
-# Update the PHP.ini file, enable <? ?> tags and quieten logging.
-RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php5/cli/php.ini
-RUN sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php5/cli/php.ini
+RUN apt-get update && apt-get install -y apt-utils adduser curl nano debconf-utils dialog g++ gcc locales make
 
-#Set the new directory as our working directory
-WORKDIR /var/www/app
+# Install mysql extension
+RUN apt-get update && apt-get install -y --force-yes \
+    freetds-dev \
+ && rm -r /var/lib/apt/lists/* \
+ && cp -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/ \
+ && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+ && docker-php-ext-install pdo_dblib
 
-#Copy all the content to the working directory
-COPY . /var/www/app
+# APC
+RUN pear config-set php_ini /usr/local/etc/php/php.ini
+RUN pecl config-set php_ini /usr/local/etc/php/php.ini
+RUN pecl install apc
 
-#Override the Apache Config
-COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
+RUN a2enmod expires
+RUN a2enmod mime
+RUN a2enmod filter
+RUN a2enmod deflate
+RUN a2enmod proxy_http
+RUN a2enmod headers
+RUN a2enmod php7
 
-#Allow directory permission
-RUN chmod -R 777 /var/www/app && \
-chmod -R 777 /var/log/apache2
+RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+
+# Edit PHP INI
+RUN echo "memory_limit = 1G" > /usr/local/etc/php/php.ini
+RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/php.ini
+RUN echo "post_max_size = 50M" >> /usr/local/etc/php/php.ini
+RUN echo "max_input_time = 60" >> /usr/local/etc/php/php.ini
+RUN echo "file_uploads = On" >> /usr/local/etc/php/php.ini
+RUN echo "max_execution_time = 300" >> /usr/local/etc/php/php.ini
+RUN echo "LimitRequestBody = 100000000" >> /usr/local/etc/php/php.ini
+
+# Clean after install
+RUN apt-get autoremove -y && apt-get clean all
+
+# Configuration for Apache
+RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
+ADD apache/000-default.conf /etc/apache2/sites-available/
+RUN ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
+RUN a2enmod rewrite
 
 EXPOSE 80
+
+# Change website folder rights and upload your website
+RUN chown -R www-data:www-data /var/www/html
+ADD ./app /var/www/html
+
+# Change working directory
+WORKDIR /var/www/html
+
+# Install and update app (rebuild into vendor folder)
+RUN composer install
+RUN composer update
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

@@ -1,6 +1,6 @@
 {
     "name": "miskowskij/aws-lamp-app",
-    "description": "A LAMP app using deployment on AWS",
+    "description": "A simple PHP app distributed and deployed with AWS under the CI princicple.",
     "homepage": "https://github.com/miskowskij/aws-lamp-app",
     "license": "Apache-2.0",
     "type": "project",
