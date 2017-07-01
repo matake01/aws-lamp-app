@@ -16,7 +16,7 @@ test:
     - vendor/bin/phpunit
     post:
     - docker run -d -p 8000:80 $DOCKER_ORGANISATION/$DOCKER_REPOSITORY_NAME:$CIRCLE_SHA1; sleep 1
-    - curl --retry 10 --retry-delay 5 -v http://localhost:8000
+    - curl -v -L --retry 10 --retry-delay 5 -v http://localhost:8000
 
 deployment:
   elasticbeanstalk:
