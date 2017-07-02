@@ -11,7 +11,7 @@ AWS_EB_BUCKET_NAME=$6
 AWS_REGION=$7
 
 # Deploys image to Docker Hub
-docker push $DOCKER_ORGANISATION/$DOCKER_REPOSITORY_NAME:$CIRCLE_SHA1
+docker push $DOCKER_ORGANISATION/$DOCKER_REPOSITORY_NAME
 
 # Creates a new Elastic Beanstalk version
 DOCKERRUN_FILE=$CIRCLE_SHA1-Dockerrun.aws.json
