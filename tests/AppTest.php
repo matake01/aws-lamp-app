@@ -50,9 +50,4 @@ class AppTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->app->bar(), 'welcome to bar');
     }
 
-    public function testHaz()
-    {
-        $this->assertEquals($this->app->haz(), 'welcome to haz');
-    }
-
 }

@@ -11,8 +11,7 @@
         {
             "environment": [],
             "name": "lamp-app",
-            "image": "goffinator/aws-lamp-app:<TAG>",
-            "update": "true",
+            "image": "goffinator/aws-lamp-app",
             "cpu": 10,
             "memory": 500,
             "portMappings": [
