@@ -1,6 +1,6 @@
-# LAMP App Deployment (AWS)
+# PHP App Deployment (AWS)
 
-An example of how an PHP+MySQL App can be distributed with AWS using Docker containers under the Continuous Delivery ([CircleCI](https://circleci.com)) principle.
+An example of how an simple PHP App can be distributed with AWS using Docker containers under the Continuous Delivery ([CircleCI](https://circleci.com)) principle.
 
 ## Flow description
 
@@ -34,7 +34,7 @@ DOCKER_USER
 
 ## Database Access
 
-This example assumes that an [Amazon RDS](https://aws.amazon.com/rds/) storage already exists with following environment variables available:
+To get this boilerplate work with a database, the simplest may be to set up a [Amazon RDS](https://aws.amazon.com/rds/) storage. In my case, using e.g. MySQL, following environment variables are configured and available in the AWS environment:
 
 ```
 RDS_HOSTNAME
