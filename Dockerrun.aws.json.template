@@ -1,17 +1,17 @@
 {
     "AWSEBDockerrunVersion": "2",
-    "family": "aws-lamp-app",
+    "family": "<FAMILY>",
     "volumes": [
         {
-            "name": "lamp-app-vol",
+            "name": "<VOLUME_NAME>",
             "host": {}
         }
     ],
     "containerDefinitions": [
         {
             "environment": [],
-            "name": "lamp-app",
-            "image": "goffinator/aws-lamp-app",
+            "name": "<ELASTIC_BEANSTALK_ENV_NAME>",
+            "image": "<DOCKER_ORGANSATION_NAME>/<DOCKER_IMAGE_NAME>",
             "cpu": 10,
             "memory": 500,
             "portMappings": [
@@ -22,8 +22,8 @@
             ],
             "mountPoints": [
                 {
-                    "sourceVolume": "lamp-app-vol",
-                    "containerPath": "/var/www/lamp-app-vol"
+                    "sourceVolume": "<VOLUME_NAME>",
+                    "containerPath": "<PATH_TO_VOLUME>"
                 }
             ],
             "essential": true
