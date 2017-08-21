@@ -1,21 +1,10 @@
 # PHP App Deployment (AWS)
 
-An example of how an simple PHP App can be distributed with AWS using Docker containers under the Continuous Delivery ([CircleCI](https://circleci.com)) principle.
-
-## Flow description
-
-The project is based on the `circle.yml` file which initially builds a new version of the Docker image based on the `Dockerfile` in the root directory. Subsequently we're stepping through some simple tests to ensure that the application software behaves as expected.
-
-If the new app version passes the tests, the new image version is pushed to [Docker Hub](https://hub.docker.com).
-
-Now we are ready to initiate the AWS deployment. First we have to create a [AWS ECS Task Definition](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) which describes our behaviors to be able to distribute the app. The Task Definition is represented in the `Dockerrun.aws.json.template` file.
-
-Then we will finally copy the new version to AWS S3 based on the recent created definition as well as creating the new application version to [AWS Elastic Beanstalk](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html).
+An example of how an simple PHP App easily can be distributed at AWS using Docker containers under the Continuous Integration/Delivery ([CircleCI](https://circleci.com)) principle.
 
 ## Prerequisites
 
-This example utilizes AWS and DOCKER information that you may not want to public. You'll need to
-configure a few CircleCI environment variables before the deploy script will work:
+This example utilizes sensitive AWS and Docker data that you may not want to make public. To accomplish that, we have to setup environment variable values at CircleCI with following key names:
 
 ```
 AWS_ACCESS_KEY_ID
@@ -32,14 +21,8 @@ DOCKER_REPOSITORY_NAME
 DOCKER_USER
 ```
 
-## Database Access
+## Techniques
 
-To get this boilerplate work with a database, the simplest may be to set up a [Amazon RDS](https://aws.amazon.com/rds/) storage. In my case, using e.g. MySQL, following environment variables are configured and available in the AWS environment:
-
-```
-RDS_HOSTNAME
-RDS_PORT
-RDS_DB_NAME
-RDS_USERNAME
-RDS_PASSWORD
-```
+* [Docker](https://www.docker.com/)
+* [CircleCI](https://circleci.com/)
+* [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
